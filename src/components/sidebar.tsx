@@ -36,6 +36,15 @@ export default function Sidebar() {
           <Image src="/wallet-icon.png" alt="Wallet" width={24} height={24} />
           My Coins
         </SidebarLink>
+        <SidebarLink href="/create-coin">
+          <Image
+            src="/create-coin-icon.png"
+            alt="Create"
+            width={24}
+            height={24}
+          />
+          Create Coin
+        </SidebarLink>
       </div>
 
       <div className="my-auto" />
