@@ -2,12 +2,13 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import type { Session } from "next-auth";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import Web3Provider from "@/components/web3-provider";
 import Sidebar from "@/components/sidebar";
-import type { Session } from "next-auth";
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: "Polypump",
@@ -35,7 +36,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <Web3Provider session={session}>
             <TRPCReactProvider>
-              <div className="relative flex min-h-screen">
+              <div className="relative flex min-h-screen flex-col md:flex-row">
+                <Navbar />
                 <Sidebar />
                 {children}
               </div>
