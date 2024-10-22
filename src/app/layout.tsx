@@ -35,7 +35,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <Web3Provider session={session}>
             <TRPCReactProvider>
-              <div className="relative flex min-h-screen flex-col">
+              <div className="relative flex min-h-screen">
                 <Sidebar />
                 {children}
               </div>
