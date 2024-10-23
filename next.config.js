@@ -5,6 +5,10 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  images: {
+    domains: ["*.mypinata.cloud", "salmon-liable-rat-317.mypinata.cloud"],
+  },
+};
 
 export default config;

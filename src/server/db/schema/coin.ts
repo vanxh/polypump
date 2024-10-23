@@ -10,7 +10,7 @@ export const coins = createTable("coins", {
   name: varchar("name", { length: 256 }).notNull(),
   symbol: varchar("symbol", { length: 256 }).notNull(),
   description: text("description"),
-  imageUrl: varchar("image_url", { length: 256 }),
+  imageUrl: varchar("image_url", { length: 256 }).notNull(),
   websiteUrl: varchar("website_url", { length: 256 }),
   telegramUrl: varchar("telegram_url", { length: 256 }),
   twitterUrl: varchar("twitter_url", { length: 256 }),
@@ -33,3 +33,5 @@ export const coinRelations = relations(coins, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export type Coin = typeof coins.$inferSelect;
