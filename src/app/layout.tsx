@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import type { Session } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -22,10 +22,13 @@ const featherBold = localFont({
   display: "swap",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  session,
-}: Readonly<{ children: React.ReactNode; session: Session | null }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const session = await getServerSession();
+
   return (
     <html
       lang="en"

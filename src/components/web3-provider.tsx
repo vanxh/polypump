@@ -6,7 +6,6 @@ import {
   type GetSiweMessageOptions,
   RainbowKitSiweNextAuthProvider,
 } from "@rainbow-me/rainbowkit-siwe-next-auth";
-import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
@@ -14,6 +13,7 @@ import { polygon } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 import { env } from "@/env";
+import SessionProvider from "@/components/session-provider";
 
 const config = getDefaultConfig({
   appName: "PolyPump",
