@@ -1,10 +1,12 @@
 import { Search } from "lucide-react";
 
-import { HydrateClient } from "@/trpc/server";
+import { api, HydrateClient } from "@/trpc/server";
 import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
+import CoinList from "@/components/coin-list";
 
 export default async function Page() {
+  const { coins } = await api.coin.getLatest({});
+
   return (
     <HydrateClient>
       <main className="flex h-screen w-full flex-col items-center gap-y-6 overflow-y-auto px-4 py-6">
@@ -17,12 +19,7 @@ export default async function Page() {
 
         <h1 className="mr-auto text-2xl font-bold">New Coins</h1>
 
-        <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          {Array.from({ length: 10 }).map((_, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <Skeleton key={index} className="h-40 w-full" />
-          ))}
-        </div>
+        <CoinList coins={coins} />
       </main>
     </HydrateClient>
   );

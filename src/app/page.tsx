@@ -4,7 +4,7 @@ import { api, HydrateClient } from "@/trpc/server";
 import { Input } from "@/components/ui/input";
 import CoinList from "@/components/coin-list";
 
-export default async function Home() {
+export default async function Page() {
   const { coins } = await api.coin.getLatest({});
 
   return (
