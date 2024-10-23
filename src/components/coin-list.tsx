@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function CoinList({ coins }: { coins?: Coin[] }) {
   return (
-    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
       {coins?.map((coin) => (
         <div
           key={coin.id}
