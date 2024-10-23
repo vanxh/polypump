@@ -24,6 +24,10 @@ export default function CoinList({ coins }: { coins?: Coin[] }) {
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <Skeleton key={index} className="h-40 w-full" />
         ))}
+
+      {!coins?.length && (
+        <p className="text-sm text-muted-foreground">No coins found</p>
+      )}
     </div>
   );
 }
