@@ -1,6 +1,8 @@
+import { TRPCError } from "@trpc/server";
+import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { coins } from "@/server/db/schema";
+import { coins, users } from "@/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
 export const coinRouter = createTRPCRouter({
@@ -16,7 +18,15 @@ export const coinRouter = createTRPCRouter({
         twitterUrl: z.string(),
       }),
     )
-    .query(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
+      const user = await ctx.db.query.users.findFirst({
+        where: eq(users.address, ctx.session?.user.name),
+      });
+
+      if (!user) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
       const coin = await ctx.db.insert(coins).values({
         name: input.name,
         symbol: input.symbol,
@@ -25,7 +35,7 @@ export const coinRouter = createTRPCRouter({
         websiteUrl: input.websiteUrl,
         telegramUrl: input.telegramUrl,
         twitterUrl: input.twitterUrl,
-        userId: ctx.session?.user.name,
+        userId: user?.id,
       });
 
       return coin;

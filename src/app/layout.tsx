@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { getServerSession } from "next-auth";
 
 import { TRPCReactProvider } from "@/trpc/react";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import Web3Provider from "@/components/web3-provider";
 import Sidebar from "@/components/sidebar";
@@ -46,6 +47,7 @@ export default async function RootLayout({
               </div>
             </TRPCReactProvider>
           </Web3Provider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
