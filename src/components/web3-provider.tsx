@@ -9,7 +9,7 @@ import {
 import type { Session } from "next-auth";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { polygon, polygonMumbai, polygonAmoy } from "wagmi/chains";
+import { polygon, polygonAmoy } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 import { env } from "@/env";
@@ -18,7 +18,7 @@ import SessionProvider from "@/components/session-provider";
 const config = getDefaultConfig({
   appName: "PolyPump",
   projectId: env.NEXT_PUBLIC_WC_PROJECT_ID,
-  chains: [polygon, polygonMumbai, polygonAmoy],
+  chains: [polygon, polygonAmoy],
   ssr: true,
 });
 
