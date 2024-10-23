@@ -1,29 +1,87 @@
-# Create T3 App
+# PolyPump
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+PolyPump is a decentralized platform for creating and managing custom tokens on the Polygon network. It allows users to easily create their own coins, explore trending tokens, and manage their portfolio.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Create custom tokens with personalized details
+- Explore trending and newly created coins
+- Manage your own coin portfolio
+- Secure authentication using Web3 and NextAuth
+- Responsive design for both desktop and mobile devices
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **Frontend**: Next.js, React, TailwindCSS
+- **Backend**: tRPC, Drizzle ORM
+- **Database**: PostgreSQL (via Neon)
+- **Blockchain**: Ethereum (Polygon network)
+- **Authentication**: NextAuth.js with SIWE (Sign-In with Ethereum)
+- **File Storage**: IPFS (via Pinata)
+- **Smart Contracts**: Solidity
 
-## Learn More
+## Getting Started
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Prerequisites
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Node.js (v18 or later)
+- Bun (v1.x.x)
+- PostgreSQL database (Neon.tech)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### Installation
 
-## How do I deploy this?
+1. Clone the repository:
+   ```
+   git clone https://github.com/vanxh/polypump.git
+   cd polypump
+   ```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+2. Install dependencies:
+   ```
+   bun install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add the following variables:
+   ```
+   DATABASE_URL=your_postgres_database_url
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXT_PUBLIC_WC_PROJECT_ID=your_walletconnect_project_id
+   PINATA_JWT=your_pinata_jwt_token
+   NEXT_PUBLIC_GATEWAY_URL=your_pinata_gateway_url
+   ```
+
+4. Run database migrations:
+   ```
+   bun db:push
+   ```
+
+5. Start the development server:
+   ```
+   bun dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## Project Structure
+
+- `src/app`: Next.js app router and page components
+- `src/components`: Reusable React components
+- `src/server`: Backend API routes and database schema
+- `src/styles`: Global CSS styles
+- `contracts`: Solidity smart contracts
+
+## Smart Contracts
+
+The project includes two main smart contracts:
+
+1. `PolyPumpCoin.sol`: ERC20 token contract for created coins
+2. `PolyPumpFactory.sol`: Factory contract for deploying new PolyPumpCoin instances
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
