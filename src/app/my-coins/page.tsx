@@ -15,7 +15,7 @@ export default async function Page() {
           icon={Search}
         />
 
-        <h1 className="mr-auto text-2xl font-bold">New Coins</h1>
+        <h1 className="mr-auto text-2xl font-bold">My Coins</h1>
 
         <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
           {Array.from({ length: 10 }).map((_, index) => (
