@@ -22,7 +22,9 @@ export const coins = createTable("coins", {
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
 
-  userId: uuid("user_id").references(() => users.id),
+  userId: uuid("user_id")
+    .references(() => users.id)
+    .notNull(),
 });
 
 export const coinRelations = relations(coins, ({ one }) => ({

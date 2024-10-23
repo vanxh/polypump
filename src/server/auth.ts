@@ -1,4 +1,4 @@
-import type { AuthOptions, Session } from "next-auth";
+import { getServerSession, type AuthOptions, type Session } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getCsrfToken } from "next-auth/react";
@@ -90,3 +90,5 @@ export const authOptions: AuthOptions = {
     },
   },
 };
+
+export const getServerAuthSession = () => getServerSession(authOptions);
