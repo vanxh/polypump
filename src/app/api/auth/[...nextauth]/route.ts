@@ -5,6 +5,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { getCsrfToken } from "next-auth/react";
 import { SiweMessage } from "siwe";
 
+import { db } from "@/server/db";
+import { users } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
+
 export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
@@ -48,10 +52,19 @@ export const authOptions: AuthOptions = {
 
           await siwe.verify({ signature: credentials?.signature ?? "" });
 
+          const user = await db.query.users.findFirst({
+            where: eq(users.address, siwe.address),
+          });
+
+          if (!user) {
+            await db.insert(users).values({ address: siwe.address });
+          }
+
           return {
             id: siwe.address,
           };
-        } catch {
+        } catch (e) {
+          console.error(e);
           return null;
         }
       },
