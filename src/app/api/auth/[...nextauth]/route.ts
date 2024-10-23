@@ -63,8 +63,7 @@ export const authOptions: AuthOptions = {
           return {
             id: siwe.address,
           };
-        } catch (e) {
-          console.error(e);
+        } catch {
           return null;
         }
       },
@@ -92,8 +91,5 @@ export const authOptions: AuthOptions = {
     },
   },
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
