@@ -3,11 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 import ConnectButton from "@/components/connect-button";
 
 export default function Sidebar() {
+  const { status } = useSession();
+
   return (
     <div className="hidden h-screen w-80 flex-col border-r border-border bg-background p-4 md:flex lg:p-6">
       <Link href="/" className="mx-auto text-2xl font-bold text-accent">
@@ -36,7 +39,7 @@ export default function Sidebar() {
           <Image src="/wallet-icon.png" alt="Wallet" width={24} height={24} />
           My Coins
         </SidebarLink>
-        <SidebarLink href="/create-coin">
+        <SidebarLink href="/create-coin" disabled={status !== "authenticated"}>
           <Image
             src="/create-coin-icon.png"
             alt="Create"
@@ -56,9 +59,11 @@ export default function Sidebar() {
 const SidebarLink = ({
   href,
   children,
+  disabled,
 }: {
   href: string;
   children: React.ReactNode;
+  disabled?: boolean;
 }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
@@ -70,7 +75,11 @@ const SidebarLink = ({
         "flex items-center gap-4 rounded-2xl px-4 py-3 text-lg font-medium transition-colors duration-200 ease-in-out hover:bg-sky-400/10",
         isActive && "text-sky-400",
         isActive && "border border-sky-400 bg-sky-400/10",
+        disabled && "cursor-not-allowed opacity-50",
       )}
+      onClick={(e) => {
+        if (disabled) e.preventDefault();
+      }}
     >
       {children}
     </Link>

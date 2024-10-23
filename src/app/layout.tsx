@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Web3Provider from "@/components/web3-provider";
 import Sidebar from "@/components/sidebar";
 import Navbar from "@/components/navbar";
+import BottomBar from "@/components/bottombar";
 
 export const metadata: Metadata = {
   title: "Polypump",
@@ -40,10 +41,11 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <Web3Provider session={session}>
             <TRPCReactProvider>
-              <div className="relative flex h-screen flex-col overflow-hidden md:flex-row">
+              <div className="relative flex h-screen flex-col overflow-hidden pb-20 md:flex-row md:pb-0">
                 <Navbar />
                 <Sidebar />
                 {children}
+                <BottomBar />
               </div>
             </TRPCReactProvider>
           </Web3Provider>
